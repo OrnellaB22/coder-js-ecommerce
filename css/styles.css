@@ -1,0 +1,52 @@
+.navbar-bg {
+	background-color: mistyrose;
+}
+
+h2{
+	text-align: center;
+    color: black;
+}
+
+.carritoInner {
+	position: fixed;
+	background-color: mistyrose;
+}
+
+#carrito-svg {
+	width: 30px;
+	height: 30px;
+}
+
+img {
+	width: 30px;
+}
+
+.contenedorPadre {
+	padding-top: 60px;
+}
+
+form.form-inline {
+	margin-top:  15px;
+	margin-bottom: 15px;
+}
+
+form.form-inline input.form-control {
+	width:  calc(100% - 215px);
+}
+
+.toastStyle {
+	border-radius: 10px;
+}
+
+.cerrado {
+	display: none;
+}
+
+.precioPesos {
+	font-size: 30px;
+}
+
+.card-img-top {
+	max-width: 300px;
+	max-height: 250px;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Simulador Carrito</title>
+    <style>
+
+      td{
+        height: 100px;
+      }
+
+    #contenedorPadre{
+
+      display:flex;
+    }
+    </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-bg fixed-top">
+      <div class="container d-flex justify-content-between">
+          <a href="index.html" class="navbar-brand">SIMULADOR</a>
+          <div class="d-flex flex-row">
+            <ul class="navbar-nav">
+              <li class="nav-item carritoContainer">
+                <img id="carrito-svg" src="img/carrito.svg" alt="">
+                <div class="carritoInner cerrado">
+                  <h2>Carrito</h2>
+                  <table class="table">
+                    <thead>
+                      <tr>             
+                        <td class="producto">Producto</td>
+                        <td class="cantidad">Cantidad</td>
+                        <td class="precio">Precio</td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                  </table>
+                  <p class="total">Total:
+                    <span id="precioTotal">0</span>
+                  </p>
+                  <a href="#Checkout" class="checkout btn btn-primary hidden">Ir al checkout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+  <div class="container d-flex justify-content center align-items center flex-column contenedorPadre">
+    <form class="form-inline col-md-12 search" onsubmit="return false">
+      <input class="form-control mr-sm-2" type="search" placeholder="Introduzca nombre a buscar" aria-label="search">
+      <button class="btn btn-primary m-1" type="submit">Buscar</button>
+      <button class="btn btn-primary m-1" type="reset" value="Reset" onclick='document.location.reload()'>Reset</button>
+    </form>
+      <div class="box-productos container grid-container row" id="listaProductos">
+        <h2 class="col-md-12">Todos los productos</h2>
+        <div class="row">
+          <div class="col">
+            <div class="card" style="width: 90%;">
+                <img src="img/Ryzen_9_3900X.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Ryzen 9 3900X</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <span class="precioPesos">$125000</span>  
+                  <a href="#" class="btn btn-primary botonCompra">Comprar</a>
+                </div>
+              </div>
+        </div>
+            <div class="col">
+                <div class="card unProducto" style="width: 90%;">
+                    <img src="img/Intel_Core_i9-9900K.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Intel Core i9-9900K</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <span class="precioPesos">$190000</span>  
+                      <a href="#" class="btn btn-primary botonCompra">Comprar</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col">
+                <div class="card unProducto" style="width: 90%;">
+                    <img src="img/XFX_AMD_Radeon_RX_5700_XT.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">AMD Radeon RX 5700 XT</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <span class="precioPesos">$230000</span>  
+                      <a href="#" class="btn btn-primary botonCompra">Comprar</a>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <br>
+        <div class="row">
+          <div class="col">
+            <div class="card unProducto" style="width: 90%;">
+                <img src="img/img2.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Lavarropa</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <span class="precioPesos">300$</span>                  
+
+                  <a href="#" class="btn btn-primary botonCompra">Comprar</a>
+                </div>
+              </div>
+        </div>
+            <div class="col">
+                <div class="card unProducto" style="width: 90%;">
+                    <img src="img/img2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">PC</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <span class="precioPesos">500$</span>                      
+                      <a href="#" class="btn btn-primary botonCompra">Comprar</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col">
+                <div class="card unProducto" style="width: 90%;">
+                    <img src="img/img2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Libreria</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <span class="precioPesos">200$</span>  
+                      <a href="#" class="btn btn-primary botonCompra">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
