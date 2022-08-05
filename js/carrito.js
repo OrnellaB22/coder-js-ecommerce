@@ -80,7 +80,12 @@ function mostrar_carrito( producto){
 function borrar_producto(e){
     let abuelo = e.target.parentNode.parentNode;
     console.log(abuelo);
-    abuelo.remove();    
+    abuelo.remove();
+    Swal.fire({
+        title: 'Éxito!',
+        text: 'El producto se ha borrado exitosamente',
+        confirmButtonText: 'Ok'
+    })
 }
 
 function testAjax() {
