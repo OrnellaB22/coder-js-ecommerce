@@ -121,7 +121,7 @@ function pokebola() {
 //Fetch productos
 const getProductos = async() => {
     try {
-        const response = await fetch("productos.json");
+        const response = await fetch("js/productos.json");
         const data = await response.json();
     }
     catch(error) {
