@@ -85,25 +85,54 @@ function borrar_producto(e){
         title: 'Éxito!',
         text: 'El producto se ha borrado exitosamente',
         confirmButtonText: 'Ok'
+    })    
+}
+
+function cerrarModal() {
+    $(".pokemodalBG").remove()
+    $(".pokemensaje").remove()
+}
+
+
+function pokebola() {
+    
+    function numeroRandom(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    let pokenumero = parseInt(numeroRandom(1,250));
+
+    $.get(`https://pokeapi.co/api/v2/pokemon/${pokenumero}`, (poke) => {
+        let pokenombre = poke.name;
+        $("div.contenedorPadre").prepend(`
+            <div class="pokemodalBG"></div>
+            <div class="pokemensaje">
+                <h2> Felicidades! Atrapaste un <span>${pokenombre}</span>
+                <img src="${poke.sprites.front_default}" alt="pokemon">
+            </div>
+            `)
+        $(".pokemensaje").append(`
+            <button type="button" id="pokemodalBtn" class="btn btn-primary" value="Aceptar">Aceptar</button>
+        `)
+        $("#pokemodalBtn").on("click", cerrarModal);
     })
 }
 
-function testAjax() {
-    return $.ajax( {
-        url:"js/productos.json"
-    });
+//Fetch productos
+const getProductos = async() => {
+    try {
+        const response = await fetch("productos.json");
+        const data = await response.json();
+    }
+    catch(error) {
+        console.log(error);
+    }
 }
 
-$.getJSON('productos.json', function(json) {
-    let productosLocal = [];
-    for (let key in json) {
-        let item = json[key];
-        productosLocal.push({
+getProductos();
 
-        })
-    }
-})
-
+//Eventos
+$("#botonPokebola").on("click", pokebola);
 
 
 let btn_compra = document.querySelectorAll(".botonCompra");
@@ -137,4 +166,3 @@ $('.carritoContainer').on('click', 'img', (e) => {
     $('.carritoInner').toggleClass('cerrado')
     e.stopPropagation()
 });
-
