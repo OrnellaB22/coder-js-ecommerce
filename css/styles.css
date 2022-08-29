@@ -1,15 +1,38 @@
+body {
+  background-color: #1f1f27;
+}
+
 .navbar-bg {
 	background-color: mistyrose;
 }
 
+.nav-item {
+  width: 3rem;
+}
+
+.colorDeFondo {
+  background-color: black;
+}
+
+h1 {
+  text-align: center;
+  border-bottom: 1px solid black;
+  width: 100%;
+  margin: 1rem;
+}
+
 h2{
 	text-align: center;
-    color: black;
+  color: black;
 }
 
 .carritoInner {
 	position: fixed;
-	background-color: mistyrose;
+	background-color: white;
+  height: 100%;
+  min-width: 28rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+  top: 56.1px;
 }
 
 #carrito-svg {
@@ -17,8 +40,8 @@ h2{
 	height: 30px;
 }
 
-img {
-	width: 30px;
+.carritoBotonBorrar {
+  color: white;
 }
 
 .pokemensaje img {
@@ -26,7 +49,21 @@ img {
 }
 
 .contenedorPadre {
-	padding-top: 60px;
+  padding-top: 4rem;
+}
+
+#listaProductos {
+  background-color: white;
+  border-radius: 10px;
+}
+
+.listaProductos-producto {
+  flex-direction: column;
+  width: 250px;
+  height: 550;
+  margin: 0.5rem;
+  padding: 0.8rem;
+  border: 2px solid mistyrose;
 }
 
 form.form-inline {
@@ -85,4 +122,9 @@ form.form-inline input.form-control {
   bottom: 0;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+#checkoutContainer {
+  background-color: white;
+  border-radius: 10px;
 }

@@ -18,17 +18,58 @@ class cliente {
     }
 }
 
+//Cargar los productos y mostrarlos en la página
+
+const producto0 = new todosLosProductos(1, "Ryzen 9 3900X", 9000, "Microprocesador");
+const producto1 = new todosLosProductos(2, "Intel I9-12900", 132550, "Microprocesador");
+const producto2 = new todosLosProductos(3, "Intel I7-12700", 89320, "Microprocesador");
+const producto3 = new todosLosProductos(4, "Motherboard Gigabyte X570 Am4", 63720, "Motherboard");
+const producto4 = new todosLosProductos(5, "Motherboard Asus X590", 66160, "Motherboard");
+const producto5 = new todosLosProductos(6, "Motherboard Msi Pro Z-690", 45810, "Motherboard");
+const producto6 = new todosLosProductos(7, "Nvidia Geforce Rtx 3090", 350000, "Placa de Video");
+const producto7 = new todosLosProductos(8, "Nvidia Geforce Rtx 3050", 87820, "Placa de Video");
+const producto8 = new todosLosProductos(9, "Amd Radeon Rx 6400", 47500, "Placa de Video");
+const producto9 = new todosLosProductos(10, "Thermaltake V250", 18400, "Gabinete");
+const producto10 = new todosLosProductos(11, "Aerocool RGB", 17100, "Gabinete");
+const producto11 = new todosLosProductos(12, "Mouse", 10000, "Perifericos");
+const producto12 = new todosLosProductos(13, "Teclado", 10400, "Perifericos");
+
+const listaDeProductos = [producto0, producto1, producto2, producto3, producto4, producto5, producto6, producto7, producto8, producto9, producto10, producto11, producto12];
+
+for (let i = 0; i < listaDeProductos.length; i++) {
+    $(`#listaProductos`).append(`<div class="listaProductos-producto d-flex" id="producto${i+1}">
+    <img src="img/producto${i}.jpg" alt="${listaDeProductos[i].nombre}">
+    <h3 id="producto${i}nombre"></h3>
+    <span id="producto${i}precio" class="precioPesos"></span>
+    <div class="listaProductos__cart">
+        <a href="#" class="btn btn-primary botonCompra">Comprar</a>
+    </div>
+</div>`);
+}
+
+for (let i = 0; i < listaDeProductos.length; i++) {
+    $(`#producto${i}nombre`).html(listaDeProductos[i].nombre);
+}
+
+for (let i = 0; i < listaDeProductos.length; i++) {
+    $(`#producto${i}precio`).html('$' + listaDeProductos[i].precio);
+}
+
+let compra = [];
+let carrito = [];
+
+
 //Funciones
 function agregar_a_carrito(e){
-    let hijo = e.target;
-    let padre = hijo.parentNode;
-    let abuelo = padre.parentNode;
-    let nombre_producto = padre.querySelector("h5").textContent;
+    let padre = e.currentTarget.parentElement.parentElement;
+    let nombre_producto = padre.querySelector("h3").textContent;
     let precio = padre.querySelector("span").textContent;
-    let img = abuelo.querySelector("img").src;
+    let id = padre.id.slice(8);
+    let img = padre.firstElementChild.src;
 
     let producto = {
 
+        id: parseInt(id),
         nombre: nombre_producto,
         img: img,
         precio: precio,
@@ -49,43 +90,70 @@ function agregar_a_carrito(e){
     }).showToast();
 
     let totalString = $('span#precioTotal')[0].innerHTML
-    let total = parseInt(totalString)
-    console.log(total)
+    let total = parseInt(totalString);
     let ultPrecio = precio.replace('$', '')
     total = total + parseInt(ultPrecio)
     $('span#precioTotal')[0].textContent = total
 
-    mostrar_carrito( producto);
+    mostrar_carrito(producto);
 }
 
-function mostrar_carrito( producto){
+function mostrar_carrito(producto){
     let fila = document.createElement("tr");
-    fila.innerHTML = `<td><img src="${producto.img}"></td>
-                      <td>${producto.nombre}</td>
+    fila.className = 'filaCarrito';
+    fila.setAttribute("id", producto.id);
+    fila.innerHTML = `<td><img class="nav-item" src="${producto.img}"> ${producto.nombre}</td>
                       <td>${producto.cantidad}</td>
-                      <td>${producto.precio}</td>
-                      <td><button class="btn-danger borrar_elemento">Borrar</button></td>`;   
+                      <td class="carritoPrecio">${producto.precio}</td>
+                      <td class="carritoBotonBorrar"><a class="btn btn-danger borrar_elemento">Borrar</button></a></td>`;   
+    
     let tabla = document.getElementById("tbody");
 
     tabla.append(fila);
 
     let botones_borrar = document.querySelectorAll(".borrar_elemento");
 
-    for( let boton of botones_borrar){
+    for(let boton of botones_borrar){
 
         boton.addEventListener("click" , borrar_producto);
     }
+
+    let tablaCheckout = document.getElementById("tbodyCheckout");
+    console.log(tablaCheckout);
+    tablaCheckout.append(fila);
 }
 
 function borrar_producto(e){
-    let abuelo = e.target.parentNode.parentNode;
-    console.log(abuelo);
-    abuelo.remove();
+    let contenedor = e.target.parentNode.parentNode;
+    let contenedorPrecio = e.currentTarget.parentNode.previousElementSibling.innerHTML;    
+    contenedor.remove();
     Swal.fire({
         title: 'Éxito!',
         text: 'El producto se ha borrado exitosamente',
         confirmButtonText: 'Ok'
-    })    
+    })
+    let totalString = $('span#precioTotal')[0].innerHTML
+    let total = parseInt(totalString)
+    let contenedorPrecioNumero = parseInt(contenedorPrecio.substring(1))
+    $('span#precioTotal')[0].textContent = total - contenedorPrecioNumero;    
+}
+
+function finalizarCompra(e) {
+    let cont = 0;
+    let productosCarrito = e.target.parentNode.children;
+    let tabla = productosCarrito.item(1);
+    for (const iteracion of tabla.rows) {
+        cont++;
+        if($(iteracion).hasClass('filaCarrito')) {
+            idEnCarrito = parseInt(iteracion.id);
+            for (const producto of listaDeProductos) {
+                if (idEnCarrito === producto.id) {
+                    compra.push(producto)
+                    sessionStorage.setItem('productoComprado_' + cont, JSON.stringify({producto}))
+                }
+            } console.log(compra);
+        }
+    }
 }
 
 function cerrarModal() {
@@ -118,44 +186,26 @@ function pokebola() {
     })
 }
 
-//Fetch productos
-const getProductos = async() => {
-    try {
-        const response = await fetch("js/productos.json");
-        const data = await response.json();
-    }
-    catch(error) {
-        console.log(error);
-    }
-}
-
-getProductos();
-
 //Eventos
+
 $("#botonPokebola").on("click", pokebola);
 
+$(".botonCompra").on("click", agregar_a_carrito);
 
-let btn_compra = document.querySelectorAll(".botonCompra");
-
-for( let boton of btn_compra){
-
-    boton.addEventListener("click" , agregar_a_carrito);
-
-}
-
-let carrito = [];
+$(".checkout").on("click", finalizarCompra);
 
 //Buscador
 
 $('form.search').submit( (e) => {
     let inputBuscador = e.target[0].value;
+    let inputMayus = inputBuscador.toUpperCase();
     $('.box-productos h2').remove();
     $('.col').remove();
     $('.box-productos').prepend('<h2 class="col-md-12">Resultados para: ' + inputBuscador + '</h2>')
     
     for (let iteracion of productos) {
-        let productoActual = iteracion.nombre;
-        if (productoActual.indexOf(inputBuscador) > -1) {
+        let productosMayus = iteracion.nombre.toUpperCase();
+        if (productosMayus.indexOf(inputMayus) > -1) {
             crearEstructura(iteracion, $('.col'))
         }
     }
@@ -166,3 +216,4 @@ $('.carritoContainer').on('click', 'img', (e) => {
     $('.carritoInner').toggleClass('cerrado')
     e.stopPropagation()
 });
+

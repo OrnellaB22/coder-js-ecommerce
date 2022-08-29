@@ -1,6 +1,6 @@
-[{ "id":"Ryzen_9","nombre":"Ryzen 9 3900X","precio":125000,"categoria":"CPU"}, 
-{"id":"Intel_i9","nombre":"Intel Core i9-9900K","precio":190000,"categoria":"CPU"}, 
-{"id":"Radeon5700","nombre":"AMD Radeon RX 5700 XT","precio":230000,"categoria":"CPU"}, 
-{"id":"AMD_CPU_4","nombre":"Ryzen 5 1500X","precio":189,"categoria":"CPU"}, 
-{"id":"AMD_CPU_5","nombre":"Ryzen 5 1600","precio":219,"categoria":"CPU"}, 
-{"id":"AMD_CPU_6","nombre":"Ryzen 5 1600X","precio":219,"categoria":"CPU"}]
+[{"id": "Ryzen_9", "nombre": "Ryzen 9 3900X"," precio": 125000, "categoria": "CPU"}, 
+{"id": "Intel_i9", "nombre": "Intel Core i9-9900K", "precio": 190000, "categoria": "CPU"}, 
+{"id": "Radeon5700", "nombre": "AMD Radeon RX 5700 XT", "precio": 230000,"categoria": "CPU"}, 
+{"id": "AMD_CPU_4", "nombre": "Ryzen 5 1500X", "precio": 189000, "categoria": "CPU"}, 
+{"id": "AMD_CPU_5", "nombre": "Ryzen 5 1600", "precio": 219000, "categoria": "CPU"}, 
+{"id": "AMD_CPU_6","nombre": "Ryzen 5 1600X", "precio": 235000, "categoria": "CPU"}]
