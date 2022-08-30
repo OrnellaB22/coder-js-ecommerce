@@ -246,7 +246,9 @@ function enviarform(e) {
                 title: 'Gracias por su compra!',
                 text: 'Por favor revise su email para ver la factura',
                 confirmButtonText: 'Ok'
-    })
+            }).then((result) => {
+                location.reload();
+            });
         }
     });
 };
