@@ -16,11 +16,11 @@
           <a href="index.html" class="navbar-brand">SIMULADOR</a>
           <div class="d-flex flex-row">
             <ul class="navbar-nav">
-              <li class="nav-item carritoContainer">
+              <li class="nav-item carritoContainer" id="carritoContainer">
                 <img id="carrito-svg" src="img/carrito.svg" alt="">
                 <div class="carritoInner p-2 cerrado">
                   <h2>Carrito</h2>
-                  <table class="table tablaCarrito">
+                  <table class="table">
                     <thead>
                       <tr>             
                         <td class="producto">Producto</td>
@@ -35,7 +35,7 @@
                   <p class="total m-2">Total: $
                     <span id="precioTotal">0</span>
                   </p>
-                  <a href="./checkout.html" class="checkout btn btn-primary m-2 hidden">Ir al checkout</a>
+                  <a href="#" class="checkout btn btn-primary m-2 hidden">Ir al checkout</a>
                 </div>
               </li>
             </ul>
@@ -43,13 +43,71 @@
         </div>
       </nav>
   </header>
-  <div class="container d-flex justify-content center align-items center flex-column contenedorPadre">
+  <div class="container d-flex justify-content center align-items center flex-column contenedorPadre" id="contenedorPadre">
     <form class="form-inline col-md-12 search" onsubmit="return false">
       <input class="form-control mr-sm-2" type="search" placeholder="Introduzca nombre a buscar" aria-label="search">
       <button class="btn btn-primary m-1" type="submit">Buscar</button>
       <button class="btn btn-primary m-1" type="reset" value="Reset" onclick='document.location.reload()'>Reset</button>
     </form>
-    <div class="box-productos container grid-container row" id="listaProductos"></div>
+    <div class="box-productos container grid-container row" id="listaProductos">
+      <h2 class="m-2">Todos los productos</h2>
+    </div>
+  </div>
+  <div class="container cerrado justify-content center align-items center flex-column contenedorPadre" id="checkoutContainer">
+    <div class="container grid-container row" id="listaProductos">
+      <h1>Finalizá tu compra</h1>
+      <div class="productos_finalizarCompra col-md-4">
+        <table class="table tablaCarrito">
+          <tbody id="tbodyCheckout">         
+          </tbody>
+        </table>
+        <div>Total: $
+          <span id="checkoutTotal"></span>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <h3>Datos Personales</h3>
+          <form action="">
+            <div class="form-group">
+              <label for="">Nombre</label>
+              <input class="form-control"  type="text">
+            </div>
+            <div class="form-group">
+              <label for="">Email</label>
+              <input class="form-control"  type="email">
+            </div>
+            <div class="form-group d-flex flex-row flex-wrap telefono">
+              <label class="w-100" for="" >Telefono</label>
+              <input class="form-control col-xs-1 col-md-2"  type="text" placeholder="011">
+              <input class="form-control col-xs-11 col-md-10"  type="text" placeholder="53441515">
+            </div>
+            <div class="form-group cuotas">
+              <label for="">Forma de pago</label>
+              <select class="form-control" name="" id="">
+                <option value="">1 cuota</option>
+                <option value="">6 cuotas</option>
+                <option value="">12 cuotas</option>
+              </select>
+            </div>
+            <h3>Datos de la tarjeta de crédito</h3>
+            <label for="NumTarjeta">Número de tarjeta</label>
+            <br>
+            <input class="form-control" type="text" name="" id="NumTarjeta" placeholder="0000 - 1234 - 5678 - 9100">
+            <div class="row">
+              <div class="col-md-4">
+                <label for="">Código</label>
+                <br>
+                <input type="text" class="form-control" placeholder="123">
+                <label for="">Vencimiento</label>
+                <input type="date" class="form-control">
+              </div>                                
+            </div>
+            <div class="form-group">
+              <input class="btn btn-primary mt-3" type="button" value="Comprar">
+            </div>
+          </form>
+      </div>
+    </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
