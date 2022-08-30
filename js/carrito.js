@@ -60,7 +60,6 @@ for (let i = 0; i < listaDeProductos.length; i++) {
 let compra = [];
 let carrito = [];
 
-
 //Funciones
 function agregar_a_carrito(e){
     let padre = e.currentTarget.parentElement.parentElement;
@@ -97,6 +96,9 @@ function agregar_a_carrito(e){
     total = total + parseInt(ultPrecio);
     $('span#precioTotal')[0].textContent = total;
     $('span#checkoutTotal')[0].textContent = total;
+
+    let botonCompra = document.getElementById("botonIrAlCheckout");
+    botonCompra.classList.remove("cerrado");
 
     mostrar_carrito(producto);
 }
@@ -151,6 +153,12 @@ function borrar_producto(e){
     let contenedorPrecioNumero = parseInt(contenedorPrecio.substring(1))
     $('span#precioTotal')[0].textContent = total - contenedorPrecioNumero;   
     $('span#checkoutTotal')[0].textContent = total - contenedorPrecioNumero;
+
+    let botonCompra = document.getElementById("botonIrAlCheckout");
+
+    if($('span#precioTotal')[0].textContent === '0') {
+        botonCompra.classList.add("cerrado");
+    }
 }
 
 function finalizarCompra(e) {
@@ -209,6 +217,39 @@ function pokebola() {
     })
 }
 
+function enviarform(e) {
+    console.log(e.target);
+    let nombre =  e.target[0].value;
+    let email =  e.target[1].value;
+    let telefono =  e.target[2].value;
+    let cuotas =  e.target[3].value.replaceAll('_', ' Cuotas de: $');
+    let creditCardNumber =  e.target[4].value;
+    let credictCardHasta =  e.target[8].value;
+    let url = "https://jsonplaceholder.typicode.com/posts";
+    
+    new cliente (nombre, email, telefono, compra);
+        
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            nombre: nombre,
+            email: email,
+            tel: telefono,
+            cuotas: cuotas,
+            creditCardNumber: creditCardNumber,
+            credictCardHasta: credictCardHasta,
+            compras: compra,
+        },
+        success: function (data) {
+            Swal.fire({
+                title: 'Gracias por su compra!',
+                text: 'Por favor revise su email para ver la factura',
+                confirmButtonText: 'Ok'
+    })
+        }
+    });
+};
 //Eventos
 
 $("#botonPokebola").on("click", pokebola);
@@ -216,6 +257,8 @@ $("#botonPokebola").on("click", pokebola);
 $(document).on('click', '.botonCompra', agregar_a_carrito);
 
 $(".checkout").on("click", finalizarCompra);
+
+$(document).on('submit', '.checkoutForm', enviarform);
 
 //Buscador
 
