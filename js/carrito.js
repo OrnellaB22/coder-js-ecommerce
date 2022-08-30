@@ -33,8 +33,9 @@ const producto9 = new todosLosProductos(11, "Thermaltake V250", 18400, "Gabinete
 const producto10 = new todosLosProductos(12, "Aerocool RGB", 17100, "Gabinete");
 const producto11 = new todosLosProductos(13, "Mouse", 10000, "Perifericos");
 const producto12 = new todosLosProductos(14, "Teclado", 10400, "Perifericos");
+const producto13 = new todosLosProductos(15, "Pokebola", "Gratis", "Promociones");
 
-const listaDeProductos = [producto0, producto1, producto2, producto3, producto4, producto5, producto6, producto7, producto8, producto9, producto10, producto11, producto12];
+const listaDeProductos = [producto0, producto1, producto2, producto3, producto4, producto5, producto6, producto7, producto8, producto9, producto10, producto11, producto12, producto13];
 
 for (let i = 0; i < listaDeProductos.length; i++) {
     $(`#listaProductos`).append(`<div class="listaProductos-producto d-flex" id="producto${i}">
@@ -43,9 +44,15 @@ for (let i = 0; i < listaDeProductos.length; i++) {
     <span id="producto${i}precio" class="precioPesos"></span>
     <div class="listaProductos__cart">
         <a href="#" class="btn btn-primary botonCompra">Comprar</a>
-    </div>
-</div>`);
+    </div>`);
 }
+
+    let containerPokebola = document.getElementById("producto13");
+    let precioPokebola = containerPokebola.children[2];
+    let botonPokebola = containerPokebola.children[3].firstElementChild;
+    console.log(botonPokebola);
+    botonPokebola.classList.remove("botonCompra");
+    botonPokebola.classList.add("botonPokebola");
 
 for (let i = 0; i < listaDeProductos.length; i++) {
     $(`#producto${i}nombre`).html(listaDeProductos[i].nombre);
@@ -254,7 +261,7 @@ function enviarform(e) {
 };
 //Eventos
 
-$("#botonPokebola").on("click", pokebola);
+$(document).on('click', '.botonPokebola', pokebola);
 
 $(document).on('click', '.botonCompra', agregar_a_carrito);
 
